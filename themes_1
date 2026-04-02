@@ -1,119 +1,291 @@
-{
-    "name": "Track here Theme",
-    "dataColors": [
-        "#006DBA",
-        "#E02140",
-        "#02214F",
-        "#4A90D9",
-        "#A8B8C8",
-        "#B3D4F0",
-        "#F5A0AE",
-        "#8AAFD4"
-    ],
-    "background": "#F4F7FB",
-    "foreground": "#02214F",
-    "tableAccent": "#006DBA",
-    "visualStyles": {
-        "*": {
-            "*": {
-                "fontFamily": [{ "value": "Segoe UI" }],
-                "border": [{ "show": false }]
-            },
-            "title": {
-                "fontColor": [{ "color": { "solid": { "color": "#FFFFFF" } } }],
-                "fontSize": [{ "value": 13 }],
-                "fontFamily": [{ "value": "Segoe UI Semibold" }],
-                "show": [{ "value": true }],
-                "background": [{ "color": { "solid": { "color": "#02214F" } } }]
-            },
-            "subTitle": {
-                "fontColor": [{ "color": { "solid": { "color": "#006DBA" } } }],
-                "fontSize": [{ "value": 11 }],
-                "fontFamily": [{ "value": "Segoe UI" }]
-            }
-        },
-        "lineChart": {
-            "*": {
-                "lineWidth": [{ "value": 2 }],
-                "markerSize": [{ "value": 4 }]
-            },
-            "valueAxis": {
-                "gridlineColor": [{ "color": { "solid": { "color": "#E8EDF2" } } }],
-                "gridlineThickness": [{ "value": 1 }],
-                "fontColor": [{ "color": { "solid": { "color": "#4A5568" } } }],
-                "fontSize": [{ "value": 10 }]
-            },
-            "categoryAxis": {
-                "fontColor": [{ "color": { "solid": { "color": "#4A5568" } } }],
-                "fontSize": [{ "value": 10 }]
-            },
-            "legend": {
-                "fontColor": [{ "color": { "solid": { "color": "#02214F" } } }],
-                "fontSize": [{ "value": 10 }]
-            }
-        },
-        "barChart": {
-            "valueAxis": {
-                "gridlineColor": [{ "color": { "solid": { "color": "#E8EDF2" } } }],
-                "gridlineThickness": [{ "value": 1 }],
-                "fontColor": [{ "color": { "solid": { "color": "#4A5568" } } }],
-                "fontSize": [{ "value": 10 }]
-            },
-            "categoryAxis": {
-                "fontColor": [{ "color": { "solid": { "color": "#4A5568" } } }],
-                "fontSize": [{ "value": 10 }]
-            },
-            "legend": {
-                "fontColor": [{ "color": { "solid": { "color": "#02214F" } } }],
-                "fontSize": [{ "value": 10 }]
-            }
-        },
-        "card": {
-            "labels": {
-                "color": [{ "color": { "solid": { "color": "#02214F" } } }],
-                "fontSize": [{ "value": 28 }],
-                "fontFamily": [{ "value": "Segoe UI Semibold" }]
-            },
-            "categoryLabels": {
-                "color": [{ "color": { "solid": { "color": "#006DBA" } } }],
-                "fontSize": [{ "value": 11 }]
-            }
-        },
-        "matrix": {
-            "grid": {
-                "gridVertical": [{ "value": false }],
-                "gridHorizontalColor": [{ "color": { "solid": { "color": "#E8EDF2" } } }],
-                "gridHorizontalThickness": [{ "value": 1 }],
-                "rowPadding": [{ "value": 6 }]
-            },
-            "columnHeaders": {
-                "fontColor": [{ "color": { "solid": { "color": "#FFFFFF" } } }],
-                "fontSize": [{ "value": 11 }],
-                "fontFamily": [{ "value": "Segoe UI Semibold" }],
-                "backColor": [{ "color": { "solid": { "color": "#02214F" } } }]
-            },
-            "rowHeaders": {
-                "fontColor": [{ "color": { "solid": { "color": "#02214F" } } }],
-                "fontSize": [{ "value": 11 }],
-                "backColor": [{ "color": { "solid": { "color": "#F4F7FB" } } }]
-            },
-            "values": {
-                "fontColor": [{ "color": { "solid": { "color": "#02214F" } } }],
-                "fontSize": [{ "value": 11 }],
-                "backColor": [{ "color": { "solid": { "color": "#FFFFFF" } } }]
-            },
-            "total": {
-                "fontColor": [{ "color": { "solid": { "color": "#FFFFFF" } } }],
-                "fontSize": [{ "value": 11 }],
-                "fontFamily": [{ "value": "Segoe UI Semibold" }],
-                "backColor": [{ "color": { "solid": { "color": "#006DBA" } } }]
-            }
-        },
-        "slicer": {
-            "data": {
-                "fontColor": [{ "color": { "solid": { "color": "#02214F" } } }],
-                "fontSize": [{ "value": 11 }]
-            }
-        }
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Power BI – ACL Credit Risk Analytics | First Citizens Bank</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0D1B2A; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+
+  .deck { width: 100%; max-width: 920px; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 12px 48px rgba(0,0,0,0.5); }
+
+  /* HEADER BAND */
+  .header { background: #02214F; padding: 28px 44px 18px; }
+  .header h1 { font-size: 23px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+  .header p  { font-size: 11px; color: #B3D4F0; }
+
+  /* FOOTER */
+  .footer { background: #F4F7FB; border-top: 1px solid #E8EDF2; padding: 9px 44px; display: flex; justify-content: space-between; align-items: center; }
+  .footer span { font-size: 10px; color: #A8B8C8; }
+
+  /* BODY */
+  .body { padding: 22px 44px 26px; }
+
+  /* GRID HELPERS */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 13px; }
+
+  /* CARD */
+  .card { background: #F4F7FB; border-radius: 8px; padding: 15px; }
+  .card.border-left { border-left: 4px solid #ccc; }
+  .card.border-top  { border-top:  4px solid #ccc; }
+  .card h3 { font-size: 12px; font-weight: 600; color: #02214F; margin-bottom: 4px; }
+  .card p  { font-size: 11px; color: #4A5568; line-height: 1.6; }
+  .card .icon { font-size: 22px; margin-bottom: 8px; }
+
+  /* STEP ROW */
+  .step-row { display: flex; align-items: center; gap: 13px; margin-bottom: 10px; }
+  .step-circle { width: 33px; height: 33px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .step-badge  { color: #fff; font-size: 11px; font-weight: 700; border-radius: 6px; padding: 4px 9px; flex-shrink: 0; }
+
+  /* TITLE SLIDE */
+  .title-slide { background: #02214F; min-height: 440px; display: flex; flex-direction: column; justify-content: space-between; padding: 54px 56px 34px; }
+  .title-tag   { background: #E02140; color: #fff; font-size: 11px; font-weight: 600; padding: 4px 14px; border-radius: 20px; display: inline-block; margin-bottom: 26px; }
+  .title-main  { font-size: 34px; font-weight: 700; color: #fff; line-height: 1.25; max-width: 580px; margin-bottom: 14px; }
+  .title-sub   { font-size: 15px; color: #B3D4F0; margin-bottom: 36px; }
+  .title-meta  { display: flex; gap: 10px; align-items: center; }
+  .title-bar   { width: 4px; height: 42px; background: #C9A84C; border-radius: 2px; }
+  .title-meta-text .top    { color: #C9A84C; font-size: 12px; font-weight: 600; }
+  .title-meta-text .bottom { color: #A8B8C8; font-size: 11px; margin-top: 3px; }
+  .tab-bar { border-top: 1px solid #1E3A5F; padding-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tab { font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 12px; cursor: pointer; border: none; }
+
+  /* FLOW ARROW */
+  .flow-arrow { color: #A8B8C8; font-size: 18px; text-align: center; margin: 2px 0 2px 46px; }
+
+  /* NEXT SLIDE SPLIT */
+  .split-label { font-size: 10px; font-weight: 600; color: #A8B8C8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+
+  /* NAV */
+  .nav { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
+  .nav button { background: #02214F; color: #fff; border: none; border-radius: 8px; padding: 11px 26px; font-size: 13px; cursor: pointer; font-family: inherit; transition: opacity .2s; }
+  .nav button:disabled { background: #222; opacity: 0.4; cursor: not-allowed; }
+  .dots { display: flex; gap: 6px; }
+  .dot { height: 8px; border-radius: 4px; background: #444; cursor: pointer; transition: all .2s; }
+
+  /* HINT */
+  .hint { color: #A8B8C8; font-size: 11px; margin-top: 10px; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck"></div>
+
+<div class="nav">
+  <button id="prev" onclick="go(-1)">← Previous</button>
+  <div class="dots" id="dots"></div>
+  <button id="next" onclick="go(1)">Next →</button>
+</div>
+<p class="hint">Press ← → arrow keys to navigate | F11 for fullscreen</p>
+
+<script>
+const NAVY="#02214F", BLUE="#006DBA", RED="#E02140", GOLD="#C9A84C", TEAL="#1D9E75", AMB="#EF9F27", SLATE="#A8B8C8";
+
+const slides = [
+  {
+    label:"Introduction",
+    render:()=>`
+    <div class="title-slide">
+      <div>
+        <span class="title-tag">First Citizens Bank</span>
+        <div class="title-main">Power BI for Credit Risk Analytics</div>
+        <div class="title-sub">How we are modernizing ACL reporting at First Citizens Bank</div>
+        <div class="title-meta">
+          <div class="title-bar"></div>
+          <div class="title-meta-text">
+            <div class="top">Credit Risk Analytics Team | Internal Presentation</div>
+            <div class="bottom">30-minute session — 10 min slides · 20 min live demo</div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-bar" id="tabs"></div>
+    </div>`
+  },
+  {
+    label:"Capabilities",
+    title:"One Platform — Many Capabilities",
+    sub:"From data connection to automated delivery",
+    render:()=>`
+    <div class="header"><h1>One Platform — Many Capabilities</h1><p>From data connection to automated delivery</p></div>
+    <div class="body">
+      <div class="grid3">
+        ${[
+          [NAVY,  "📊","Reports",       "Multi-page interactive reports with filters, slicers and navigation — built in Power BI Desktop"],
+          [BLUE,  "📌","Dashboards",    "Single canvas combining tiles from multiple reports — perfect for executive and operational monitoring"],
+          [TEAL,  "🐍","Python",        "Inject Python to connect data, run calculations and build custom visuals with matplotlib and seaborn"],
+          [RED,   "⚡","Power Automate","Automate alerts, export to PowerPoint or PDF, notify teams on refresh — no manual work needed"],
+          [AMB,   "📤","Export",        "Export specific report pages to PowerPoint or PDF directly from Power BI Service with one click"],
+          [GOLD,  "🔗","Integration",   "Connect SharePoint, Excel, SQL, APIs and Python — all in one unified data model"],
+        ].map(([c,i,t,d])=>`
+          <div class="card border-top" style="border-top-color:${c}">
+            <div class="icon">${i}</div>
+            <h3>${t}</h3><p>${d}</p>
+          </div>`).join("")}
+      </div>
+    </div>`
+  },
+  {
+    label:"SVB Build",
+    title:"How We Built the SVB Calculations",
+    sub:"Python + DAX working together for ACL analytics",
+    render:()=>`
+    <div class="header"><h1>How We Built the SVB Calculations</h1><p>Python + DAX working together for ACL analytics</p></div>
+    <div class="body">
+      ${[
+        [NAVY, "01","Python Calculated Table",  "Used Python in Power Query to build ACL_GUARDRAIL and ACL_RUFC across Q0–Q21. The guardrail logic applies a recursive step-down from Q9 to Q21 floored by a minimum balance rate."],
+        [BLUE, "02","DAX Measures",             "Built self-contained measures for BASE and ISA scenarios filtered to SVB segment. No slicers needed — filters baked directly into each measure."],
+        [TEAL, "03","Cumulative 9Q EL",         "Added a rolling 9-quarter sum — for each quarter sums ACL_GUARDRAIL from Q(n) to Q(n+8) to capture forward-looking exposure."],
+        [AMB,  "04","Line Chart Visuals",       "Built separate BASE and ISA line charts showing ACL_RUFC vs Cumulative_9Q_EL by quarter — filtered to Q0–Q9 at the visual level."],
+      ].map(([c,n,t,d])=>`
+        <div class="card border-left" style="border-left-color:${c}; display:flex; gap:13px; margin-bottom:11px;">
+          <span class="step-badge" style="background:${c}">${n}</span>
+          <div><h3>${t}</h3><p>${d}</p></div>
+        </div>`).join("")}
+    </div>`
+  },
+  {
+    label:"Dashboard",
+    title:"Dashboard — Combining Multiple Reports",
+    sub:"One entry point connecting all analytical work",
+    render:()=>`
+    <div class="header"><h1>Dashboard — Combining Multiple Reports</h1><p>One entry point connecting all analytical work</p></div>
+    <div class="body">
+      <div class="grid2">
+        ${[
+          [NAVY, "Welcome Page",            "Sidebar navigation linking to all reports including cross-report pages via Web URL buttons"],
+          [BLUE, "Multi-report tiles",      "Combines ACL Summary, EL by Scenario, Guardrail Analysis and Run Status from separate reports"],
+          [TEAL, "Analysis 1 connected",    "Dashboard links to Analysis 1 — showing how separate workstreams can be unified in one view"],
+          [RED,  "Portfolios",              "SVB live and active — Commercial and General ready to be built following the same pattern"],
+          [AMB,  "Sensitivity & Controls",  "Dedicated report pages linked via Web URL buttons from the welcome navigation page"],
+          [GOLD, "Run Status banner",       "Live status pulled from SharePoint — cycle name, owner and next expected run date always visible"],
+        ].map(([c,t,d])=>`
+          <div class="card border-left" style="border-left-color:${c}">
+            <h3>${t}</h3><p>${d}</p>
+          </div>`).join("")}
+      </div>
+    </div>`
+  },
+  {
+    label:"Controls",
+    title:"Controls, Validation and Run Tracking",
+    sub:"Built-in governance and monitoring capabilities",
+    render:()=>`
+    <div class="header"><h1>Controls, Validation and Run Tracking</h1><p>Built-in governance and monitoring capabilities</p></div>
+    <div class="body">
+      <div class="grid3">
+        ${[
+          [NAVY, "✅","Data Validation",       "Python validates column types, missing quarters and group completeness before the table loads into the model"],
+          [BLUE, "🔄","Refresh Tracking",      "Power Automate triggers on dataset refresh — sends Teams notification with timestamp confirming data is current"],
+          [RED,  "🔍","In Progress Run IDs",   "Run Status page shows active REPORT_RUN_ID values — team confirms which runs are included in current results"],
+          [TEAL, "📋","Run Status Page",       "Live SharePoint-connected page showing cycle, run owner, last updated date and next expected run"],
+          [AMB,  "⚠️","Refresh Failure Alert", "Power Automate sends an immediate alert to the technical owner if a dataset refresh fails"],
+          [GOLD, "🏦","Scenario Controls",     "Measures locked to specific scenarios and segments — no cross-contamination between BASE, ISA, S3 and S4"],
+        ].map(([c,i,t,d])=>`
+          <div class="card border-top" style="border-top-color:${c}">
+            <div class="icon">${i}</div>
+            <h3>${t}</h3><p>${d}</p>
+          </div>`).join("")}
+      </div>
+    </div>`
+  },
+  {
+    label:"Feedback",
+    title:"Feedback and Communication Cycle",
+    sub:"Every user has a clear path to raise concerns or ask questions",
+    render:()=>`
+    <div class="header"><h1>Feedback and Communication Cycle</h1><p>Every user has a clear path to raise concerns or ask questions</p></div>
+    <div class="body">
+      ${[
+        [NAVY, "1","User spots something",   "Error, question, format issue or business concern noticed while viewing the report"],
+        [BLUE, "2","Opens Feedback Panel",   "Clicks the Feedback button — panel shows three categories with the right contact per topic"],
+        [TEAL, "3","Selects category",       "Controls → Stifano &nbsp;|&nbsp; Feedback & Format → Mustapha &nbsp;|&nbsp; Business Questions → Timano"],
+        [AMB,  "4","Submits",               "Email pre-filled with page name and category — or submits via Microsoft Forms for structured tracking"],
+        [RED,  "5","Owner responds",        "Right person receives the query directly — no routing confusion, no lost emails"],
+      ].map(([c,n,t,d],i,arr)=>`
+        <div class="step-row">
+          <div class="step-circle" style="background:${c}">${n}</div>
+          <div class="card" style="flex:1; margin:0"><h3>${t}</h3><p>${d}</p></div>
+        </div>
+        ${i<arr.length-1?`<div class="flow-arrow">↓</div>`:""}`).join("")}
+    </div>`
+  },
+  {
+    label:"What's Next",
+    title:"Export Options and What Comes Next",
+    sub:"We have built the foundation — here is where we go from here",
+    render:()=>`
+    <div class="header"><h1>Export Options and What Comes Next</h1><p>We have built the foundation — here is where we go from here</p></div>
+    <div class="body">
+      <div class="grid2">
+        <div>
+          <div class="split-label">Export options available today</div>
+          ${[
+            [NAVY, "PowerPoint export",  "Power BI Service → Export → PowerPoint — specific pages exported with one click"],
+            [BLUE, "PDF export",         "Power BI Service → Export → PDF — full report or specific pages as a document"],
+            [RED,  "Power Automate",     "Future: automated export triggered by button — saves to SharePoint and notifies the team"],
+          ].map(([c,t,d])=>`
+            <div class="card border-left" style="border-left-color:${c}; margin-bottom:10px">
+              <h3>${t}</h3><p>${d}</p>
+            </div>`).join("")}
+        </div>
+        <div>
+          <div class="split-label">What comes next</div>
+          ${[
+            ["🏦","Commercial and General portfolios — mirror the SVB build"],
+            ["🤖","ML forecasting — Python + scikit-learn for EL trend prediction beyond Q21"],
+            ["📱","Mobile executive dashboard with real time KPI alerts"],
+            ["📤","Automated PowerPoint export via Power Automate with Pro license"],
+          ].map(([i,d])=>`
+            <div class="card" style="display:flex; gap:10px; align-items:flex-start; margin-bottom:10px">
+              <span style="font-size:20px">${i}</span>
+              <p>${d}</p>
+            </div>`).join("")}
+        </div>
+      </div>
+    </div>`
+  }
+];
+
+let cur = 0;
+
+function render() {
+  const s = slides[cur];
+  document.getElementById("deck").innerHTML = `
+    ${s.render()}
+    <div class="footer">
+      <span>First Citizens Bank | Credit Risk Analytics | Confidential</span>
+      <span>${cur+1} / ${slides.length}</span>
+    </div>`;
+
+  // inject tabs on title slide
+  const tabs = document.getElementById("tabs");
+  if (tabs) {
+    tabs.innerHTML = slides.map((sl,i)=>`
+      <button class="tab" onclick="jump(${i})"
+        style="background:${i===cur?"#C9A84C":"#1E3A5F"};color:${i===cur?"#02214F":"#A8B8C8"}">
+        ${sl.label}
+      </button>`).join("");
+  }
+
+  // dots
+  document.getElementById("dots").innerHTML = slides.map((_,i)=>`
+    <div class="dot" onclick="jump(${i})"
+      style="width:${i===cur?22:8}px; background:${i===cur?"#C9A84C":"#444"}"></div>`).join("");
+
+  document.getElementById("prev").disabled = cur===0;
+  document.getElementById("next").disabled = cur===slides.length-1;
 }
+
+function go(d) { cur = Math.max(0, Math.min(slides.length-1, cur+d)); render(); }
+function jump(i) { cur=i; render(); }
+
+document.addEventListener("keydown", e => {
+  if (e.key==="ArrowRight"||e.key==="ArrowDown")  go(1);
+  if (e.key==="ArrowLeft" ||e.key==="ArrowUp")    go(-1);
+});
+
+render();
+</script>
+</body>
+</html>
