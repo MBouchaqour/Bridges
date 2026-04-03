@@ -1,291 +1,241 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Power BI – ACL Credit Risk Analytics | First Citizens Bank</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', sans-serif; background: #0D1B2A; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+📊 Power BI Team Knowledge Base
+Your team's end-to-end reference for building reports and dashboards
+How to use this guide: Each section is self-contained. Beginners start at Section 1. Intermediate users jump directly to the section they need using the links below.
 
-  .deck { width: 100%; max-width: 920px; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 12px 48px rgba(0,0,0,0.5); }
+🗂️ TABLE OF CONTENTS
+#	Section	Who It's For
+1	Getting Started	Beginners
+2	Power BI Desktop – Orientation	Beginners
+3	Data Connections & Power Query (M Language)	Beginner–Intermediate
+4	Data Modeling & Star Schema	Intermediate
+5	DAX Formulas	Intermediate
+6	DAX Studio	Intermediate
+7	Visualizations & Report Design	All Levels
+8	Python & Power BI	Intermediate
+9	SQL Queries in Power BI	Intermediate
+10	Publishing & Sharing	All Levels
+11	Tips, Tricks & Best Practices	All Levels
+12	Troubleshooting & FAQs	All Levels
+1. Getting Started
+🎯 Goal: Get Power BI installed and ready to use
 
-  /* HEADER BAND */
-  .header { background: #02214F; padding: 28px 44px 18px; }
-  .header h1 { font-size: 23px; font-weight: 700; color: #fff; margin-bottom: 5px; }
-  .header p  { font-size: 11px; color: #B3D4F0; }
+1.1 What is Power BI?
+ Content to be added
+1.2 Requesting Power BI Installation (IT Process)
+ Step-by-step IT request instructions
+ License types (Free vs Pro vs Premium)
+ Who to contact in your organization
+1.3 Installing Power BI Desktop
+ Download link (Microsoft Store vs Direct)
+ System requirements
+ Installation walkthrough (screenshots)
+1.4 First-Time Setup
+ Signing in with your organizational account
+ Language and regional settings
+ Connecting to your organization's workspace
+1.5 Recommended Learning Resources
+ Microsoft Learn (free)
+ Internal team resources
+ YouTube channels
+2. Power BI Desktop – Orientation
+🎯 Goal: Understand the Power BI interface before building anything
 
-  /* FOOTER */
-  .footer { background: #F4F7FB; border-top: 1px solid #E8EDF2; padding: 9px 44px; display: flex; justify-content: space-between; align-items: center; }
-  .footer span { font-size: 10px; color: #A8B8C8; }
+2.1 Interface Overview
+ Report View, Data View, Model View explained
+ The ribbon and what each tab does
+ Fields pane, Filters pane, Visualizations pane
+2.2 Understanding the Data Flow
+ Source → Power Query → Data Model → Report
+ Diagram of the end-to-end flow
+2.3 Saving and File Types
+ .pbix vs .pbit (template) files
+ Where to save (SharePoint, OneDrive, local)
+3. Data Connections & Power Query (M Language)
+🎯 Goal: Connect to data sources and shape data before it hits the model
 
-  /* BODY */
-  .body { padding: 22px 44px 26px; }
+3.1 Connecting to Data Sources
+ Excel / CSV
+ SQL Server
+ SharePoint
+ Web / API
+3.2 Power Query Editor – Orientation
+ Applied Steps explained
+ How to use the Advanced Editor
+3.3 Common M Language Operations
+ Filtering rows (Table.SelectRows)
+ Removing columns (Table.RemoveColumns)
+ Changing types (Table.TransformColumnTypes)
+ Appending tables (Table.Combine)
+ Custom columns (Table.AddColumn)
+ List.Generate for row extension logic
+3.4 Best Practices
+ Never modify the source query — always create a reference
+ Name your steps clearly
+ Disable load for staging queries
+4. Data Modeling & Star Schema
+🎯 Goal: Build a clean model that makes DAX simple and reports fast
 
-  /* GRID HELPERS */
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
-  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 13px; }
+4.1 What is a Star Schema?
+ Fact tables vs Dimension tables explained simply
+ Visual diagram of a Star Schema
+4.2 Building Relationships
+ One-to-many vs many-to-many
+ Active vs inactive relationships
+ Cross-filter direction
+4.3 Naming Conventions
+ Tables: PascalCase (e.g. DimDate, FactSales)
+ Columns: Snake_Case (e.g. total_allowance)
+ Measures: Title Case with brackets (e.g. [Total Sales])
+4.4 Calculated Columns vs Measures
+ When to use each
+ Performance implications
+5. DAX Formulas
+🎯 Goal: Write clean, efficient DAX measures
 
-  /* CARD */
-  .card { background: #F4F7FB; border-radius: 8px; padding: 15px; }
-  .card.border-left { border-left: 4px solid #ccc; }
-  .card.border-top  { border-top:  4px solid #ccc; }
-  .card h3 { font-size: 12px; font-weight: 600; color: #02214F; margin-bottom: 4px; }
-  .card p  { font-size: 11px; color: #4A5568; line-height: 1.6; }
-  .card .icon { font-size: 22px; margin-bottom: 8px; }
+5.1 DAX Basics
+ What is Filter Context (plain English explanation)
+ What is Row Context (plain English explanation)
+ How CALCULATE changes context
+5.2 Core Functions Reference
+ Aggregation: SUM, AVERAGE, COUNT, DISTINCTCOUNT
+ Logic: IF, SWITCH, COALESCE
+ Filter: CALCULATE, FILTER, ALL, ALLEXCEPT
+ Iterator: SUMX, MAXX, MINX
+ Table: SUMMARIZE, TOPN, UNION, ADDCOLUMNS
+ Time Intelligence: DATEYTD, SAMEPERIODLASTYEAR
+5.3 VAR / RETURN Pattern
+ Why to always use VAR
+ Debugging with VAR
+ Examples
+5.4 Common Measure Patterns
+ Rolling window sum
+ Year-over-Year growth
+ Waterfall chart offset measures
+ Peak quarter detection
+ Cumulative totals
+5.5 DAX Naming Conventions
+ Use _ prefix for helper measures (e.g. _Delta)
+ Descriptive names (e.g. [Total Allowance BASE SVB])
+6. DAX Studio
+🎯 Goal: Use DAX Studio to test, debug and optimize measures
 
-  /* STEP ROW */
-  .step-row { display: flex; align-items: center; gap: 13px; margin-bottom: 10px; }
-  .step-circle { width: 33px; height: 33px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0; }
-  .step-badge  { color: #fff; font-size: 11px; font-weight: 700; border-radius: 6px; padding: 4px 9px; flex-shrink: 0; }
+6.1 What is DAX Studio and Why Use It?
+ Download and installation
+ Connecting to a Power BI Desktop file
+6.2 Running Queries
+ EVALUATE syntax
+ Filtering results
+ Viewing table output
+6.3 Debugging Measures
+ How to isolate a VAR and return it
+ Using DEFINE MEASURE
+6.4 Performance Optimization
+ Server Timings explained
+ Query Plan basics
+ Identifying slow measures
+7. Visualizations & Report Design
+🎯 Goal: Build clean, intuitive, professional reports
 
-  /* TITLE SLIDE */
-  .title-slide { background: #02214F; min-height: 440px; display: flex; flex-direction: column; justify-content: space-between; padding: 54px 56px 34px; }
-  .title-tag   { background: #E02140; color: #fff; font-size: 11px; font-weight: 600; padding: 4px 14px; border-radius: 20px; display: inline-block; margin-bottom: 26px; }
-  .title-main  { font-size: 34px; font-weight: 700; color: #fff; line-height: 1.25; max-width: 580px; margin-bottom: 14px; }
-  .title-sub   { font-size: 15px; color: #B3D4F0; margin-bottom: 36px; }
-  .title-meta  { display: flex; gap: 10px; align-items: center; }
-  .title-bar   { width: 4px; height: 42px; background: #C9A84C; border-radius: 2px; }
-  .title-meta-text .top    { color: #C9A84C; font-size: 12px; font-weight: 600; }
-  .title-meta-text .bottom { color: #A8B8C8; font-size: 11px; margin-top: 3px; }
-  .tab-bar { border-top: 1px solid #1E3A5F; padding-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
-  .tab { font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 12px; cursor: pointer; border: none; }
+7.1 Choosing the Right Visual
+ Bar / Column → comparisons
+ Line → trends over time
+ Matrix → tabular with subtotals
+ Waterfall → running totals / bridges
+ Card → single KPI callout
+ Custom visuals (when and which ones)
+7.2 Report Design Principles
+ White space is your friend
+ Consistent color palette (max 3 colors)
+ Clear titles and labels
+ One story per page
+7.3 Slicers & Interactivity
+ Slicer types (dropdown, tile, between)
+ Sync slicers across pages
+ Bookmarks for navigation
+ Drill-through pages
+7.4 Waterfall Charts (Advanced)
+ Waterfall Start measure pattern
+ Waterfall Amount measure pattern
+ Upper / Lower measures for custom visuals
+ NCO bar alignment technique
+7.5 Tooltips & UX Enhancements
+ Custom tooltip pages
+ Conditional formatting
+ Dynamic titles using measures
+8. Python & Power BI
+🎯 Goal: Use Python when native visuals aren't enough
 
-  /* FLOW ARROW */
-  .flow-arrow { color: #A8B8C8; font-size: 18px; text-align: center; margin: 2px 0 2px 46px; }
+8.1 When to Use Python (The Escalation Rule)
+ Native visual can't produce the chart → use Python
+ DAX is too complex → pre-aggregate in Python
+8.2 Setup
+ Installing Python locally
+ Configuring Power BI to find Python
+ Required libraries: pandas, matplotlib, seaborn
+8.3 Python Visual Limitations
+ Static (not interactive)
+ Requires local Python environment
+ Refresh considerations
+8.4 Common Python Visual Examples
+ Heatmap (seaborn)
+ Violin plot
+ Correlation matrix
+9. SQL Queries in Power BI
+🎯 Goal: Use SQL to pre-filter and shape data at the source
 
-  /* NEXT SLIDE SPLIT */
-  .split-label { font-size: 10px; font-weight: 600; color: #A8B8C8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+9.1 When to Use SQL vs Power Query
+ Large tables → filter in SQL first
+ Joins → do in SQL, not Power Query
+9.2 Connecting via Native SQL Query
+ How to enter a custom SQL query on connection
+ Parameterizing SQL queries
+9.3 Common SQL Patterns Used in Reports
+ Filtering by scenario / segment
+ Aggregating before import
+ Window functions for running totals
+10. Publishing & Sharing
+🎯 Goal: Get your report to the right people
 
-  /* NAV */
-  .nav { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
-  .nav button { background: #02214F; color: #fff; border: none; border-radius: 8px; padding: 11px 26px; font-size: 13px; cursor: pointer; font-family: inherit; transition: opacity .2s; }
-  .nav button:disabled { background: #222; opacity: 0.4; cursor: not-allowed; }
-  .dots { display: flex; gap: 6px; }
-  .dot { height: 8px; border-radius: 4px; background: #444; cursor: pointer; transition: all .2s; }
+10.1 Publishing to Power BI Service
+ Publish from Desktop walkthrough
+ Workspaces explained
+10.2 Sharing Options
+ Share a report link
+ Embed in Teams / SharePoint
+ Export to PDF / PowerPoint
+10.3 Scheduled Refresh
+ Setting up a data gateway
+ Configuring refresh schedule
+11. Tips, Tricks & Best Practices
+🎯 Curated shortcuts and habits that save time
 
-  /* HINT */
-  .hint { color: #A8B8C8; font-size: 11px; margin-top: 10px; text-align: center; }
-</style>
-</head>
-<body>
+ Always use a Star Schema — flat tables kill performance
+ Never use calculated columns where a measure works
+ Use COALESCE instead of IF(ISBLANK(...))
+ Keep measure tables separate from data tables
+ Use VAR always — it makes debugging 10x easier
+ Name your Power Query steps clearly
+ Create a reference query instead of modifying source
+ Use bookmarks for navigation instead of page tabs
+ Add a "Last Refreshed" card to every report
+12. Troubleshooting & FAQs
+🎯 Common problems and how to fix them
 
-<div class="deck" id="deck"></div>
+12.1 Data Issues
+ Blank values appearing unexpectedly
+ Relationships not filtering correctly
+ Duplicate rows after append
+12.2 DAX Issues
+ Measure returns BLANK
+ CALCULATE not applying filter
+ Circular dependency error
+12.3 Power Query Issues
+ "We cannot convert value to type Text" error
+ Column not found after source change
+ Slow refresh times
+12.4 Visual Issues
+ Waterfall bars misaligned
+ Slicer not filtering all pages
+ Python visual not rendering
+Last updated: April 2026 | Maintained by: [Your Team Name]
 
-<div class="nav">
-  <button id="prev" onclick="go(-1)">← Previous</button>
-  <div class="dots" id="dots"></div>
-  <button id="next" onclick="go(1)">Next →</button>
-</div>
-<p class="hint">Press ← → arrow keys to navigate | F11 for fullscreen</p>
-
-<script>
-const NAVY="#02214F", BLUE="#006DBA", RED="#E02140", GOLD="#C9A84C", TEAL="#1D9E75", AMB="#EF9F27", SLATE="#A8B8C8";
-
-const slides = [
-  {
-    label:"Introduction",
-    render:()=>`
-    <div class="title-slide">
-      <div>
-        <span class="title-tag">First Citizens Bank</span>
-        <div class="title-main">Power BI for Credit Risk Analytics</div>
-        <div class="title-sub">How we are modernizing ACL reporting at First Citizens Bank</div>
-        <div class="title-meta">
-          <div class="title-bar"></div>
-          <div class="title-meta-text">
-            <div class="top">Credit Risk Analytics Team | Internal Presentation</div>
-            <div class="bottom">30-minute session — 10 min slides · 20 min live demo</div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-bar" id="tabs"></div>
-    </div>`
-  },
-  {
-    label:"Capabilities",
-    title:"One Platform — Many Capabilities",
-    sub:"From data connection to automated delivery",
-    render:()=>`
-    <div class="header"><h1>One Platform — Many Capabilities</h1><p>From data connection to automated delivery</p></div>
-    <div class="body">
-      <div class="grid3">
-        ${[
-          [NAVY,  "📊","Reports",       "Multi-page interactive reports with filters, slicers and navigation — built in Power BI Desktop"],
-          [BLUE,  "📌","Dashboards",    "Single canvas combining tiles from multiple reports — perfect for executive and operational monitoring"],
-          [TEAL,  "🐍","Python",        "Inject Python to connect data, run calculations and build custom visuals with matplotlib and seaborn"],
-          [RED,   "⚡","Power Automate","Automate alerts, export to PowerPoint or PDF, notify teams on refresh — no manual work needed"],
-          [AMB,   "📤","Export",        "Export specific report pages to PowerPoint or PDF directly from Power BI Service with one click"],
-          [GOLD,  "🔗","Integration",   "Connect SharePoint, Excel, SQL, APIs and Python — all in one unified data model"],
-        ].map(([c,i,t,d])=>`
-          <div class="card border-top" style="border-top-color:${c}">
-            <div class="icon">${i}</div>
-            <h3>${t}</h3><p>${d}</p>
-          </div>`).join("")}
-      </div>
-    </div>`
-  },
-  {
-    label:"SVB Build",
-    title:"How We Built the SVB Calculations",
-    sub:"Python + DAX working together for ACL analytics",
-    render:()=>`
-    <div class="header"><h1>How We Built the SVB Calculations</h1><p>Python + DAX working together for ACL analytics</p></div>
-    <div class="body">
-      ${[
-        [NAVY, "01","Python Calculated Table",  "Used Python in Power Query to build ACL_GUARDRAIL and ACL_RUFC across Q0–Q21. The guardrail logic applies a recursive step-down from Q9 to Q21 floored by a minimum balance rate."],
-        [BLUE, "02","DAX Measures",             "Built self-contained measures for BASE and ISA scenarios filtered to SVB segment. No slicers needed — filters baked directly into each measure."],
-        [TEAL, "03","Cumulative 9Q EL",         "Added a rolling 9-quarter sum — for each quarter sums ACL_GUARDRAIL from Q(n) to Q(n+8) to capture forward-looking exposure."],
-        [AMB,  "04","Line Chart Visuals",       "Built separate BASE and ISA line charts showing ACL_RUFC vs Cumulative_9Q_EL by quarter — filtered to Q0–Q9 at the visual level."],
-      ].map(([c,n,t,d])=>`
-        <div class="card border-left" style="border-left-color:${c}; display:flex; gap:13px; margin-bottom:11px;">
-          <span class="step-badge" style="background:${c}">${n}</span>
-          <div><h3>${t}</h3><p>${d}</p></div>
-        </div>`).join("")}
-    </div>`
-  },
-  {
-    label:"Dashboard",
-    title:"Dashboard — Combining Multiple Reports",
-    sub:"One entry point connecting all analytical work",
-    render:()=>`
-    <div class="header"><h1>Dashboard — Combining Multiple Reports</h1><p>One entry point connecting all analytical work</p></div>
-    <div class="body">
-      <div class="grid2">
-        ${[
-          [NAVY, "Welcome Page",            "Sidebar navigation linking to all reports including cross-report pages via Web URL buttons"],
-          [BLUE, "Multi-report tiles",      "Combines ACL Summary, EL by Scenario, Guardrail Analysis and Run Status from separate reports"],
-          [TEAL, "Analysis 1 connected",    "Dashboard links to Analysis 1 — showing how separate workstreams can be unified in one view"],
-          [RED,  "Portfolios",              "SVB live and active — Commercial and General ready to be built following the same pattern"],
-          [AMB,  "Sensitivity & Controls",  "Dedicated report pages linked via Web URL buttons from the welcome navigation page"],
-          [GOLD, "Run Status banner",       "Live status pulled from SharePoint — cycle name, owner and next expected run date always visible"],
-        ].map(([c,t,d])=>`
-          <div class="card border-left" style="border-left-color:${c}">
-            <h3>${t}</h3><p>${d}</p>
-          </div>`).join("")}
-      </div>
-    </div>`
-  },
-  {
-    label:"Controls",
-    title:"Controls, Validation and Run Tracking",
-    sub:"Built-in governance and monitoring capabilities",
-    render:()=>`
-    <div class="header"><h1>Controls, Validation and Run Tracking</h1><p>Built-in governance and monitoring capabilities</p></div>
-    <div class="body">
-      <div class="grid3">
-        ${[
-          [NAVY, "✅","Data Validation",       "Python validates column types, missing quarters and group completeness before the table loads into the model"],
-          [BLUE, "🔄","Refresh Tracking",      "Power Automate triggers on dataset refresh — sends Teams notification with timestamp confirming data is current"],
-          [RED,  "🔍","In Progress Run IDs",   "Run Status page shows active REPORT_RUN_ID values — team confirms which runs are included in current results"],
-          [TEAL, "📋","Run Status Page",       "Live SharePoint-connected page showing cycle, run owner, last updated date and next expected run"],
-          [AMB,  "⚠️","Refresh Failure Alert", "Power Automate sends an immediate alert to the technical owner if a dataset refresh fails"],
-          [GOLD, "🏦","Scenario Controls",     "Measures locked to specific scenarios and segments — no cross-contamination between BASE, ISA, S3 and S4"],
-        ].map(([c,i,t,d])=>`
-          <div class="card border-top" style="border-top-color:${c}">
-            <div class="icon">${i}</div>
-            <h3>${t}</h3><p>${d}</p>
-          </div>`).join("")}
-      </div>
-    </div>`
-  },
-  {
-    label:"Feedback",
-    title:"Feedback and Communication Cycle",
-    sub:"Every user has a clear path to raise concerns or ask questions",
-    render:()=>`
-    <div class="header"><h1>Feedback and Communication Cycle</h1><p>Every user has a clear path to raise concerns or ask questions</p></div>
-    <div class="body">
-      ${[
-        [NAVY, "1","User spots something",   "Error, question, format issue or business concern noticed while viewing the report"],
-        [BLUE, "2","Opens Feedback Panel",   "Clicks the Feedback button — panel shows three categories with the right contact per topic"],
-        [TEAL, "3","Selects category",       "Controls → Stifano &nbsp;|&nbsp; Feedback & Format → Mustapha &nbsp;|&nbsp; Business Questions → Timano"],
-        [AMB,  "4","Submits",               "Email pre-filled with page name and category — or submits via Microsoft Forms for structured tracking"],
-        [RED,  "5","Owner responds",        "Right person receives the query directly — no routing confusion, no lost emails"],
-      ].map(([c,n,t,d],i,arr)=>`
-        <div class="step-row">
-          <div class="step-circle" style="background:${c}">${n}</div>
-          <div class="card" style="flex:1; margin:0"><h3>${t}</h3><p>${d}</p></div>
-        </div>
-        ${i<arr.length-1?`<div class="flow-arrow">↓</div>`:""}`).join("")}
-    </div>`
-  },
-  {
-    label:"What's Next",
-    title:"Export Options and What Comes Next",
-    sub:"We have built the foundation — here is where we go from here",
-    render:()=>`
-    <div class="header"><h1>Export Options and What Comes Next</h1><p>We have built the foundation — here is where we go from here</p></div>
-    <div class="body">
-      <div class="grid2">
-        <div>
-          <div class="split-label">Export options available today</div>
-          ${[
-            [NAVY, "PowerPoint export",  "Power BI Service → Export → PowerPoint — specific pages exported with one click"],
-            [BLUE, "PDF export",         "Power BI Service → Export → PDF — full report or specific pages as a document"],
-            [RED,  "Power Automate",     "Future: automated export triggered by button — saves to SharePoint and notifies the team"],
-          ].map(([c,t,d])=>`
-            <div class="card border-left" style="border-left-color:${c}; margin-bottom:10px">
-              <h3>${t}</h3><p>${d}</p>
-            </div>`).join("")}
-        </div>
-        <div>
-          <div class="split-label">What comes next</div>
-          ${[
-            ["🏦","Commercial and General portfolios — mirror the SVB build"],
-            ["🤖","ML forecasting — Python + scikit-learn for EL trend prediction beyond Q21"],
-            ["📱","Mobile executive dashboard with real time KPI alerts"],
-            ["📤","Automated PowerPoint export via Power Automate with Pro license"],
-          ].map(([i,d])=>`
-            <div class="card" style="display:flex; gap:10px; align-items:flex-start; margin-bottom:10px">
-              <span style="font-size:20px">${i}</span>
-              <p>${d}</p>
-            </div>`).join("")}
-        </div>
-      </div>
-    </div>`
-  }
-];
-
-let cur = 0;
-
-function render() {
-  const s = slides[cur];
-  document.getElementById("deck").innerHTML = `
-    ${s.render()}
-    <div class="footer">
-      <span>First Citizens Bank | Credit Risk Analytics | Confidential</span>
-      <span>${cur+1} / ${slides.length}</span>
-    </div>`;
-
-  // inject tabs on title slide
-  const tabs = document.getElementById("tabs");
-  if (tabs) {
-    tabs.innerHTML = slides.map((sl,i)=>`
-      <button class="tab" onclick="jump(${i})"
-        style="background:${i===cur?"#C9A84C":"#1E3A5F"};color:${i===cur?"#02214F":"#A8B8C8"}">
-        ${sl.label}
-      </button>`).join("");
-  }
-
-  // dots
-  document.getElementById("dots").innerHTML = slides.map((_,i)=>`
-    <div class="dot" onclick="jump(${i})"
-      style="width:${i===cur?22:8}px; background:${i===cur?"#C9A84C":"#444"}"></div>`).join("");
-
-  document.getElementById("prev").disabled = cur===0;
-  document.getElementById("next").disabled = cur===slides.length-1;
-}
-
-function go(d) { cur = Math.max(0, Math.min(slides.length-1, cur+d)); render(); }
-function jump(i) { cur=i; render(); }
-
-document.addEventListener("keydown", e => {
-  if (e.key==="ArrowRight"||e.key==="ArrowDown")  go(1);
-  if (e.key==="ArrowLeft" ||e.key==="ArrowUp")    go(-1);
-});
-
-render();
-</script>
-</body>
-</html>
