@@ -1,241 +1,551 @@
 📊 Power BI Team Knowledge Base
-Your team's end-to-end reference for building reports and dashboards
-How to use this guide: Each section is self-contained. Beginners start at Section 1. Intermediate users jump directly to the section they need using the links below.
+End-to-end reference for building reports and dashboards
+How to use: Beginners start at Section 1. Intermediate users jump directly to their section. Use the navigation bar at the top and bottom of every page.
 
-🗂️ TABLE OF CONTENTS
-#	Section	Who It's For
-1	Getting Started	Beginners
-2	Power BI Desktop – Orientation	Beginners
-3	Data Connections & Power Query (M Language)	Beginner–Intermediate
-4	Data Modeling & Star Schema	Intermediate
-5	DAX Formulas	Intermediate
-6	DAX Studio	Intermediate
-7	Visualizations & Report Design	All Levels
-8	Python & Power BI	Intermediate
-9	SQL Queries in Power BI	Intermediate
-10	Publishing & Sharing	All Levels
-11	Tips, Tricks & Best Practices	All Levels
-12	Troubleshooting & FAQs	All Levels
+🏠 TABLE OF CONTENTS
+#	Section	Level
+1	Getting Started	🟢 Beginner
+2	Power BI Desktop – Orientation	🟢 Beginner
+3	Power Query & M Language	🟡 Intermediate
+4	Data Modeling & Star Schema	🟡 Intermediate
+5	DAX Formulas	🟡 Intermediate
+6	DAX Studio	🟡 Intermediate
+7	Visualizations & Report Design	🟢 Beginner
+8	Python & Power BI	🔴 Advanced
+9	SQL Queries in Power BI	🟡 Intermediate
+10	Publishing & Sharing	🟢 Beginner
+11	Tips & Best Practices	🟢 All Levels
+12	Troubleshooting & FAQs	🟢 All Levels
 1. Getting Started
-🎯 Goal: Get Power BI installed and ready to use
-
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🏠 Table of Contents  |  Next: Power BI Orientation →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 1.1 What is Power BI?
- Content to be added
-1.2 Requesting Power BI Installation (IT Process)
- Step-by-step IT request instructions
- License types (Free vs Pro vs Premium)
- Who to contact in your organization
+Power BI is Microsoft's business intelligence tool that lets you connect to data, transform it, build a data model, and create interactive reports and dashboards — all in one place.
+
+It has three main components:
+
+Power BI Desktop — the free authoring tool you install on your computer. This is where you build everything.
+Power BI Service — the online platform (app.powerbi.com) where you publish and share reports with your team.
+Power BI Mobile — a mobile app to view reports on the go.
+💡 As a report builder, you will spend 95% of your time in Power BI Desktop.
+
+1.2 Requesting Power BI Installation
+Submit an IT request through your organization's helpdesk portal
+Request: "Power BI Desktop — latest version"
+Specify: No admin rights needed — it can be installed from the Microsoft Store
+License needed: Power BI Pro (required for sharing reports with others)
+Free license = you can build but not share
+Pro license = build + share + collaborate
+Contact your manager to approve the Pro license if not already assigned
 1.3 Installing Power BI Desktop
- Download link (Microsoft Store vs Direct)
- System requirements
- Installation walkthrough (screenshots)
+Option A — Microsoft Store (recommended, no IT needed):
+
+Open the Microsoft Store on your computer
+Search for "Power BI Desktop"
+Click Install
+Launch from Start Menu when done
+Option B — Direct download:
+
+Go to: https://powerbi.microsoft.com/downloads
+Click Download Free
+Run the installer (.exe file)
+Follow the setup wizard
 1.4 First-Time Setup
- Signing in with your organizational account
- Language and regional settings
- Connecting to your organization's workspace
+Launch Power BI Desktop
+Sign in with your organizational email (not personal Gmail)
+Go to File → Options and Settings → Options
+Under Regional Settings → set locale to match your data format
+Under Python Scripting → set your Python path if using Python visuals
 1.5 Recommended Learning Resources
- Microsoft Learn (free)
- Internal team resources
- YouTube channels
+Resource	Link	Best For
+Microsoft Learn	learn.microsoft.com	Structured beginner path
+SQLBI	sqlbi.com	DAX deep dives
+Guy in a Cube	YouTube	Practical tips
+DAX Studio Docs	daxstudio.org	DAX Studio reference
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🏠 Table of Contents  |  Next: Power BI Orientation →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 2. Power BI Desktop – Orientation
-🎯 Goal: Understand the Power BI interface before building anything
-
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Getting Started  |  🏠 TOC  |  Next: Power Query →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 2.1 Interface Overview
- Report View, Data View, Model View explained
- The ribbon and what each tab does
- Fields pane, Filters pane, Visualizations pane
-2.2 Understanding the Data Flow
- Source → Power Query → Data Model → Report
- Diagram of the end-to-end flow
-2.3 Saving and File Types
- .pbix vs .pbit (template) files
- Where to save (SharePoint, OneDrive, local)
-3. Data Connections & Power Query (M Language)
-🎯 Goal: Connect to data sources and shape data before it hits the model
+When you open Power BI Desktop you will see three views on the left sidebar:
 
-3.1 Connecting to Data Sources
- Excel / CSV
- SQL Server
- SharePoint
- Web / API
-3.2 Power Query Editor – Orientation
- Applied Steps explained
- How to use the Advanced Editor
-3.3 Common M Language Operations
- Filtering rows (Table.SelectRows)
- Removing columns (Table.RemoveColumns)
- Changing types (Table.TransformColumnTypes)
- Appending tables (Table.Combine)
- Custom columns (Table.AddColumn)
- List.Generate for row extension logic
-3.4 Best Practices
- Never modify the source query — always create a reference
- Name your steps clearly
- Disable load for staging queries
+Icon	View	What You Do Here
+📊	Report View	Build visuals and design report pages
+🗃️	Data View	Inspect your data as a table, add calculated columns
+🔗	Model View	Build relationships between tables
+Key panels in Report View:
+
+Filters pane (left) — apply filters at visual, page, or report level
+Visualizations pane (right) — pick chart types and assign fields
+Fields pane (far right) — all your tables and columns live here
+2.2 The Data Flow (How Power BI Works)
+Data Source → Power Query → Data Model → Report
+(Excel/SQL)   (Clean/Shape)  (Relationships) (Visuals)
+Power Query runs first — it cleans and shapes your data before it loads
+Data Model stores the cleaned data and manages relationships
+Report reads from the model — it never touches the source directly
+2.3 File Types
+Extension	What It Is
+.pbix	Standard Power BI file — contains data + report
+.pbit	Template file — structure only, no data
+.pbids	Data source connection file
+💡 Always save .pbix files to SharePoint or OneDrive so your team can access them.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Getting Started  |  🏠 TOC  |  Next: Power Query →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. Power Query & M Language
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Orientation  |  🏠 TOC  |  Next: Data Modeling →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3.1 What is Power Query?
+Power Query is Power BI's data preparation engine. You use it to clean, reshape, and extend your data before it loads into the model. Every step you take is recorded and can be edited or deleted at any time.
+
+💡 Rule: Never modify your source query directly. Always create a Reference query so your original data stays intact.
+
+3.2 Common M Language Operations
+Filter rows:
+
+Table.SelectRows(Source, each [SCENARIO] = "BASE")
+Remove columns:
+
+Table.RemoveColumns(Source, {"PORTFOLIO", "UNUSED_COL"})
+Keep specific columns:
+
+Table.SelectColumns(Source, {"ID", "SCENARIO", "EL"})
+Add a custom column:
+
+Table.AddColumn(Source, "NewCol", each [EL] * 0.5, type number)
+Append two tables:
+
+Table.Combine({Table1, Table2})
+Change column types:
+
+Table.TransformColumnTypes(Source, {
+    {"ID", type text},
+    {"EL", type number}
+})
+Generate rows using a loop:
+
+List.Generate(
+    () => [qtr = 10, value = StartValue],
+    each [qtr] <= 21,
+    each [qtr = [qtr] + 1, value = [value] - Delta],
+    each [PER_QTR = [qtr], TOTAL_ALLOWANCE = [value]]
+)
+3.3 Best Practices
+✅ Create a Reference instead of duplicating queries
+✅ Name every Applied Step clearly (right-click → Rename Step)
+✅ Disable Load on staging/helper queries (right-click query → uncheck Enable Load)
+✅ Use Advanced Editor for complex logic
+❌ Never hard-code values that could change — use parameters instead
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Orientation  |  🏠 TOC  |  Next: Data Modeling →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 4. Data Modeling & Star Schema
-🎯 Goal: Build a clean model that makes DAX simple and reports fast
-
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Power Query  |  🏠 TOC  |  Next: DAX Formulas →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 4.1 What is a Star Schema?
- Fact tables vs Dimension tables explained simply
- Visual diagram of a Star Schema
-4.2 Building Relationships
- One-to-many vs many-to-many
- Active vs inactive relationships
- Cross-filter direction
+A Star Schema organizes your data into two types of tables:
+
+Fact Table — contains numbers you want to measure (e.g. sales, allowance, EL). Has many rows.
+Dimension Table — contains descriptive attributes used to filter/slice (e.g. Date, Scenario, Segment). Has fewer rows.
+        DimDate
+           |
+DimScenario — FactAllowance — DimSegment
+           |
+        DimPortfolio
+💡 Think of the Fact table as the center of a star, with Dimension tables as the points.
+
+4.2 Relationships
+One-to-Many (most common) — one row in Dim matches many rows in Fact
+Many-to-Many — avoid if possible, can cause unexpected filter behavior
+Active vs Inactive — only one active relationship per table pair; use USERELATIONSHIP() in DAX to activate an inactive one
+Cross-filter direction:
+
+Single — filters flow one way (Dim → Fact). Default and recommended.
+Both — filters flow both ways. Use carefully — can cause ambiguity.
 4.3 Naming Conventions
- Tables: PascalCase (e.g. DimDate, FactSales)
- Columns: Snake_Case (e.g. total_allowance)
- Measures: Title Case with brackets (e.g. [Total Sales])
+Object	Convention	Example
+Fact table	Prefix Fact	FactAllowance
+Dimension table	Prefix Dim	DimScenario
+Measure	Title Case	[Total Allowance]
+Helper measure	Underscore prefix	[_Delta]
+Columns	UPPER_SNAKE	TOTAL_ALLOWANCE
 4.4 Calculated Columns vs Measures
- When to use each
- Performance implications
+Calculated Column	Measure
+Calculated at	Data refresh	Query time (on demand)
+Stored in	Model (uses RAM)	Not stored
+Use for	Row-level categorization	Aggregations in visuals
+Example	[Quarter Label] = "Q" & [PER_QTR]	[Total EL] = SUM([EL])
+💡 Rule of thumb: If you can write it as a measure, do not use a calculated column.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Power Query  |  🏠 TOC  |  Next: DAX Formulas →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 5. DAX Formulas
-🎯 Goal: Write clean, efficient DAX measures
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Data Modeling  |  🏠 TOC  |  Next: DAX Studio →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5.1 Filter Context vs Row Context (Plain English)
+Filter Context — the set of filters currently active when a measure is evaluated. Think of it as "what the user has selected on the report" (slicers, visual filters, page filters).
 
-5.1 DAX Basics
- What is Filter Context (plain English explanation)
- What is Row Context (plain English explanation)
- How CALCULATE changes context
+Row Context — exists when DAX is iterating row by row through a table. This happens inside calculated columns and iterator functions like SUMX, MAXX.
+
+💡 CALCULATE is the most important DAX function — it changes the filter context before evaluating an expression.
+
 5.2 Core Functions Reference
- Aggregation: SUM, AVERAGE, COUNT, DISTINCTCOUNT
- Logic: IF, SWITCH, COALESCE
- Filter: CALCULATE, FILTER, ALL, ALLEXCEPT
- Iterator: SUMX, MAXX, MINX
- Table: SUMMARIZE, TOPN, UNION, ADDCOLUMNS
- Time Intelligence: DATEYTD, SAMEPERIODLASTYEAR
-5.3 VAR / RETURN Pattern
- Why to always use VAR
- Debugging with VAR
- Examples
+Aggregation:
+
+[Total Allowance] = SUM('Fact'[TOTAL_ALLOWANCE])
+[Avg EL]          = AVERAGE('Fact'[EL])
+[Unique Quarters] = DISTINCTCOUNT('Fact'[PER_QTR])
+Logic:
+
+[Label] = IF([Total EL] > 0, "Positive", "Zero or Negative")
+[Label] = SWITCH(SELECTEDVALUE('Table'[Step]), "A", 1, "B", 2, BLANK())
+[Value] = COALESCE([Measure1], [Measure2], 0)
+Filter:
+
+[Base EL] = CALCULATE(SUM('Fact'[EL]), 'Fact'[SCENARIO] = "BASE")
+[All EL]  = CALCULATE(SUM('Fact'[EL]), ALL('Fact'))
+Iterator:
+
+[Weighted EL] = SUMX('Fact', 'Fact'[EL] * 'Fact'[WEIGHT])
+[Peak Quarter] = MAXX(TOPN(1, SUMMARIZE(...), [Value], DESC), 'Fact'[PER_QTR])
+5.3 Always Use VAR / RETURN
+VAR stores a result so it can be reused. It also makes debugging much easier.
+
+[My Measure] =
+VAR _base   = CALCULATE(SUM('Fact'[EL]), 'Fact'[SCENARIO] = "BASE")
+VAR _stress = CALCULATE(SUM('Fact'[EL]), 'Fact'[SCENARIO] = "STRESS")
+VAR _diff   = _base - _stress
+RETURN
+    DIVIDE(_diff, _base, 0)
+💡 To debug: temporarily change RETURN to return any intermediate VAR (e.g. RETURN _base) to inspect its value.
+
 5.4 Common Measure Patterns
- Rolling window sum
- Year-over-Year growth
- Waterfall chart offset measures
- Peak quarter detection
- Cumulative totals
-5.5 DAX Naming Conventions
- Use _ prefix for helper measures (e.g. _Delta)
- Descriptive names (e.g. [Total Allowance BASE SVB])
+Rolling 9-Quarter Window:
+
+[Cum 9Q EL PQ0] =
+CALCULATE(
+    SUM('Fact'[TOTAL_ALLOWANCE]),
+    'Fact'[SCENARIO]  = "BASE",
+    'Fact'[I_SEGMENT] = "SVB",
+    'Fact'[PER_QTR]  >= 0,
+    'Fact'[PER_QTR]  <= 8
+)
+OR Filter for data gaps:
+
+[EL SVB BASE] =
+VAR _svb =
+    CALCULATE(SUM('Fact'[EL]),
+        'Fact'[SCENARIO]  = "BASE",
+        'Fact'[I_SEGMENT] = "SVB")
+VAR _gb =
+    CALCULATE(SUM('Fact'[EL]),
+        'Fact'[SCENARIO]  = "BASE",
+        'Fact'[I_SEGMENT] = "General Bank",
+        'Fact'[PORTFOLIO] = "SVB")
+RETURN
+    COALESCE(_svb, 0) + COALESCE(_gb, 0)
+Waterfall Offset:
+
+[Waterfall Amount] =
+VAR EndACL   = [Ending ACL RUFC]
+VAR Prov2Top = [Peak ACL] + [Provision 2]
+RETURN
+    SWITCH(SELECTEDVALUE('Steps'[StepKey]),
+        "NCO2", Prov2Top - EndACL,
+        ...
+    )
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Data Modeling  |  🏠 TOC  |  Next: DAX Studio →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 6. DAX Studio
-🎯 Goal: Use DAX Studio to test, debug and optimize measures
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: DAX Formulas  |  🏠 TOC  |  Next: Visualizations →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6.1 What is DAX Studio?
+DAX Studio is a free external tool that connects to your Power BI Desktop file and lets you write, test, and debug DAX queries directly — without affecting your report.
 
-6.1 What is DAX Studio and Why Use It?
- Download and installation
- Connecting to a Power BI Desktop file
-6.2 Running Queries
- EVALUATE syntax
- Filtering results
- Viewing table output
-6.3 Debugging Measures
- How to isolate a VAR and return it
- Using DEFINE MEASURE
-6.4 Performance Optimization
- Server Timings explained
- Query Plan basics
- Identifying slow measures
+Download: https://daxstudio.org
+
+6.2 Connecting to Power BI Desktop
+Open your .pbix file in Power BI Desktop
+Open DAX Studio
+Select "PBI / SSDT Model" from the connection dialog
+Choose your open Power BI file from the list
+Click Connect
+6.3 Running a Query
+Every DAX Studio query starts with EVALUATE:
+
+-- View a full table
+EVALUATE 'FactAllowance'
+
+-- Filter a table
+EVALUATE
+FILTER(
+    'FactAllowance',
+    'FactAllowance'[SCENARIO] = "BASE"
+)
+
+-- Test a measure
+EVALUATE
+ROW("Result", [Total Allowance BASE SVB])
+6.4 Debugging a Measure with DEFINE
+DEFINE
+    MEASURE 'Fact'[_Debug] =
+        VAR _base = CALCULATE(SUM('Fact'[EL]), 'Fact'[SCENARIO] = "BASE")
+        RETURN _base   -- return any VAR to inspect it
+
+EVALUATE
+ROW("Debug Value", 'Fact'[_Debug])
+💡 This lets you test measures without creating them in Power BI first.
+
+6.5 Performance — Server Timings
+Click Server Timings button in the toolbar
+Run your query
+Look at Total time and Storage Engine vs Formula Engine split
+High Formula Engine time → your DAX logic is complex, simplify it
+High Storage Engine time → your model may need optimization
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: DAX Formulas  |  🏠 TOC  |  Next: Visualizations →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 7. Visualizations & Report Design
-🎯 Goal: Build clean, intuitive, professional reports
-
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: DAX Studio  |  🏠 TOC  |  Next: Python & Power BI →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 7.1 Choosing the Right Visual
- Bar / Column → comparisons
- Line → trends over time
- Matrix → tabular with subtotals
- Waterfall → running totals / bridges
- Card → single KPI callout
- Custom visuals (when and which ones)
+Goal	Best Visual
+Compare categories	Bar / Column chart
+Show trend over time	Line chart
+Show running totals / bridges	Waterfall chart
+Show a single KPI number	Card
+Show data in a table with subtotals	Matrix
+Show part-to-whole	Donut / Pie (use sparingly)
+Show rank changes over time	Ribbon chart
+Show distribution	Histogram / Box Plot
 7.2 Report Design Principles
- White space is your friend
- Consistent color palette (max 3 colors)
- Clear titles and labels
- One story per page
+One story per page — don't cram everything on one page
+White space — leave breathing room between visuals
+Max 3 colors — pick a palette and stick to it
+Clear titles — every visual needs a descriptive title
+Consistent font sizes — title 14pt, labels 10pt, axis 9pt
+Left to right reading order — most important KPI top-left
 7.3 Slicers & Interactivity
- Slicer types (dropdown, tile, between)
- Sync slicers across pages
- Bookmarks for navigation
- Drill-through pages
-7.4 Waterfall Charts (Advanced)
- Waterfall Start measure pattern
- Waterfall Amount measure pattern
- Upper / Lower measures for custom visuals
- NCO bar alignment technique
-7.5 Tooltips & UX Enhancements
- Custom tooltip pages
- Conditional formatting
- Dynamic titles using measures
+Slicer types: Dropdown (saves space), Tile (visual), Between (date ranges)
+Sync slicers: View tab → Sync Slicers → apply across pages
+Bookmarks: Used to simulate navigation buttons or toggle views
+Drill-through: Right-click a data point → drill to a detail page
+7.4 Waterfall Chart Pattern
+Every waterfall bar needs three measures:
+
+Measure	Purpose
+Waterfall Start	Base of the bar (offset from zero)
+Waterfall Amount	Visible size of the bar
+Waterfall End	Top of the bar = Start + Amount
+Navigation bars use Upper and Lower to control direction:
+
+Waterfall Upper = MAX([Waterfall Start], [Waterfall End])
+Waterfall Lower = MIN([Waterfall Start], [Waterfall End])
+7.5 Dynamic Titles
+Make your visual titles respond to slicer selections:
+
+[Dynamic Title] =
+"Total EL — Scenario: " & SELECTEDVALUE('Dim'[SCENARIO], "All Scenarios")
+Assign this measure to the visual title field under Format → General → Title → fx.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: DAX Studio  |  🏠 TOC  |  Next: Python & Power BI →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 8. Python & Power BI
-🎯 Goal: Use Python when native visuals aren't enough
-
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Visualizations  |  🏠 TOC  |  Next: SQL Queries →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 8.1 When to Use Python (The Escalation Rule)
- Native visual can't produce the chart → use Python
- DAX is too complex → pre-aggregate in Python
+Only use Python when:
+
+A native Power BI visual cannot produce the chart you need
+The DAX required would be so complex it hurts performance
+⚠️ Python visuals are static — they do not respond to slicers or cross-filtering.
+
 8.2 Setup
- Installing Python locally
- Configuring Power BI to find Python
- Required libraries: pandas, matplotlib, seaborn
-8.3 Python Visual Limitations
- Static (not interactive)
- Requires local Python environment
- Refresh considerations
-8.4 Common Python Visual Examples
- Heatmap (seaborn)
- Violin plot
- Correlation matrix
+Install Python from https://python.org (version 3.9+ recommended)
+Install required libraries — open Command Prompt and run:
+pip install pandas matplotlib seaborn
+In Power BI Desktop → File → Options → Python Scripting
+Set the Python home directory to your installation path
+8.3 Example — Heatmap
+python
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# 'dataset' is the Power BI dataframe passed automatically
+pivot = dataset.pivot(index="I_SEGMENT", columns="PER_QTR", values="EL")
+
+plt.figure(figsize=(12, 6))
+sns.heatmap(pivot, annot=True, fmt=".1f", cmap="RdYlGn")
+plt.title("EL Heatmap by Segment and Quarter")
+plt.tight_layout()
+plt.show()
+8.4 Example — Violin Plot
+python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 6))
+sns.violinplot(data=dataset, x="SCENARIO", y="TOTAL_ALLOWANCE", palette="muted")
+plt.title("Allowance Distribution by Scenario")
+plt.tight_layout()
+plt.show()
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Visualizations  |  🏠 TOC  |  Next: SQL Queries →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 9. SQL Queries in Power BI
-🎯 Goal: Use SQL to pre-filter and shape data at the source
-
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Python  |  🏠 TOC  |  Next: Publishing & Sharing →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 9.1 When to Use SQL vs Power Query
- Large tables → filter in SQL first
- Joins → do in SQL, not Power Query
-9.2 Connecting via Native SQL Query
- How to enter a custom SQL query on connection
- Parameterizing SQL queries
-9.3 Common SQL Patterns Used in Reports
- Filtering by scenario / segment
- Aggregating before import
- Window functions for running totals
+Use SQL when...	Use Power Query when...
+Table has millions of rows	Table is small enough to import fully
+You need server-side joins	You need to combine Excel + SQL sources
+You want to pre-aggregate	You need conditional column logic
+9.2 Entering a Custom SQL Query
+In Power BI → Get Data → SQL Server
+Enter your server and database
+Expand Advanced Options
+Paste your SQL in the SQL Statement box
+Click OK
+9.3 Common SQL Patterns
+Filter before importing:
+
+sql
+SELECT *
+FROM CCAR2026
+WHERE SCENARIO = 'BASE'
+  AND I_SEGMENT = 'SVB'
+  AND PER_QTR BETWEEN 0 AND 9
+Pre-aggregate at source:
+
+sql
+SELECT
+    SCENARIO,
+    I_SEGMENT,
+    PER_QTR,
+    SUM(TOTAL_ALLOWANCE) AS TOTAL_ALLOWANCE,
+    SUM(EL)              AS EL
+FROM CCAR2026
+GROUP BY SCENARIO, I_SEGMENT, PER_QTR
+Running total using window function:
+
+sql
+SELECT
+    PER_QTR,
+    EL,
+    SUM(EL) OVER (
+        PARTITION BY SCENARIO, I_SEGMENT
+        ORDER BY PER_QTR
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS Cumulative_EL
+FROM CCAR2026
+WHERE SCENARIO = 'BASE'
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Python  |  🏠 TOC  |  Next: Publishing & Sharing →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 10. Publishing & Sharing
-🎯 Goal: Get your report to the right people
-
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: SQL Queries  |  🏠 TOC  |  Next: Tips & Best Practices →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 10.1 Publishing to Power BI Service
- Publish from Desktop walkthrough
- Workspaces explained
+In Power BI Desktop → click Publish (Home tab)
+Select your Workspace (not "My Workspace" for team reports)
+Click Select
+Go to app.powerbi.com to view the published report
 10.2 Sharing Options
- Share a report link
- Embed in Teams / SharePoint
- Export to PDF / PowerPoint
+Method	Best For
+Share link	Quick sharing with specific people
+Embed in Teams	Team collaboration
+Embed in SharePoint	Intranet portal
+Export to PDF	Static snapshot for stakeholders
+Publish as App	Polished experience for end users
 10.3 Scheduled Refresh
- Setting up a data gateway
- Configuring refresh schedule
-11. Tips, Tricks & Best Practices
-🎯 Curated shortcuts and habits that save time
-
- Always use a Star Schema — flat tables kill performance
- Never use calculated columns where a measure works
- Use COALESCE instead of IF(ISBLANK(...))
- Keep measure tables separate from data tables
- Use VAR always — it makes debugging 10x easier
- Name your Power Query steps clearly
- Create a reference query instead of modifying source
- Use bookmarks for navigation instead of page tabs
- Add a "Last Refreshed" card to every report
+In Power BI Service → find your dataset → click ⋯ → Settings
+Expand Scheduled Refresh
+Toggle On
+Set frequency (daily, weekly) and time
+If connecting to on-premise data → install and configure On-premises Data Gateway first
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: SQL Queries  |  🏠 TOC  |  Next: Tips & Best Practices →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+11. Tips & Best Practices
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Publishing  |  🏠 TOC  |  Next: Troubleshooting →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Modeling
+✅ Always use a Star Schema — flat tables kill performance
+✅ Keep measure tables separate from data tables
+❌ Never use many-to-many relationships unless absolutely necessary
+DAX
+✅ Always use VAR / RETURN — makes debugging 10x easier
+✅ Use COALESCE instead of IF(ISBLANK(x), 0, x)
+✅ Prefix helper measures with _ (e.g. [_Delta])
+❌ Never use calculated columns where a measure works
+❌ Avoid FILTER(ALL(Table), ...) — use specific column filters instead
+Power Query
+✅ Name every Applied Step clearly
+✅ Create a Reference query — never modify the source
+✅ Disable Load on staging queries
+❌ Never hard-code values — use parameters
+Report Design
+✅ Add a "Last Refreshed" card to every report page
+✅ Use bookmarks for navigation between views
+✅ Use dynamic titles that reflect slicer selections
+❌ Never use more than 3 colors in a single report
+❌ Never put more than 5 visuals on one page
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Publishing  |  🏠 TOC  |  Next: Troubleshooting →
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 12. Troubleshooting & FAQs
-🎯 Common problems and how to fix them
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Tips & Best Practices  |  🏠 Table of Contents
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DAX Issues
+Measure returns BLANK unexpectedly → Wrap with COALESCE([Measure], 0) or check if filter context is too restrictive
 
-12.1 Data Issues
- Blank values appearing unexpectedly
- Relationships not filtering correctly
- Duplicate rows after append
-12.2 DAX Issues
- Measure returns BLANK
- CALCULATE not applying filter
- Circular dependency error
-12.3 Power Query Issues
- "We cannot convert value to type Text" error
- Column not found after source change
- Slow refresh times
-12.4 Visual Issues
- Waterfall bars misaligned
- Slicer not filtering all pages
- Python visual not rendering
-Last updated: April 2026 | Maintained by: [Your Team Name]
+CALCULATE not applying filter → Make sure you are using column filters (Table[Col] = "Value") not measure filters
+
+Circular dependency error → You are referencing a measure inside a calculated column in the same table — move logic to a measure instead
+
+Power Query Issues
+"We cannot convert value to type Text" → Use Text.From([Column]) inline instead of Table.TransformColumnTypes
+
+Column not found after source change → Go to Applied Steps → find the step that references the missing column → update the column name
+
+Slow refresh times → Filter rows early in the query (Step 1 or 2) to reduce volume before transformations
+
+Visual Issues
+Waterfall bars misaligned → Check that Waterfall Start + Waterfall Amount = Waterfall End for every step
+
+Slicer not filtering all pages → Go to View → Sync Slicers → enable sync for all pages
+
+Python visual not rendering → Check Python path in Options → ensure pandas and matplotlib are installed
+
+FAQs
+Q: What is the difference between a measure and a calculated column? A: A measure is calculated on demand when a visual renders. A calculated column is calculated at refresh and stored in the model. Use measures for aggregations, calculated columns for row-level labels.
+
+Q: Why is my report slow? A: Most likely causes — too many calculated columns, bidirectional relationships, or complex DAX with nested FILTER(ALL(...)) patterns.
+
+Q: Can two people edit the same .pbix file at the same time? A: No. Power BI Desktop does not support co-authoring. Use Power BI Service workspaces for collaboration.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+← Previous: Tips & Best Practices  |  🏠 Table of Contents
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Last updated: April 2026 | Maintained by: Power BI Team
 
